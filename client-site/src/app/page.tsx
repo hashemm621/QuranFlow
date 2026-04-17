@@ -1,7 +1,7 @@
 import SurahList from "@/components/SurahList"; 
 
 export default async function HomePage() {
-  const res = await fetch("http://localhost:5000/api/surahs", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/surahs`, {
     next: { revalidate: 3600 } 
   });
   

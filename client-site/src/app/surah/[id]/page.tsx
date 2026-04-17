@@ -1,8 +1,9 @@
 import AyahList from "@/components/AyahList";
 
 async function getSurahData(id: string) {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
   try {
-    const res = await fetch(`http://localhost:5000/api/surah/${id}`, {
+    const res = await fetch(`${apiUrl}/api/surah/${id}`, {
       next: { revalidate: 3600 },
     });
     return res.json();
