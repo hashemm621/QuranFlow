@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
-  // স্ক্রল পজিশন চেক করা
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {

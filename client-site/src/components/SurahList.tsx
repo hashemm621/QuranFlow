@@ -20,10 +20,8 @@ export default function SurahList({ initialSurahs }: { initialSurahs: Surah[] })
 
   return (
     <div className="w-full">
-      {/* Search Box Section */}
       <div className="max-w-xl mx-auto relative group -mt-10 mb-16 z-30">
         <div className="relative">
-          {/* সার্চ আইকন (বাম দিকে) */}
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
