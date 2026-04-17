@@ -1,64 +1,47 @@
-import Image from "next/image";
+import SurahList from "@/components/SurahList"; 
 
-export default function Home() {
+export default async function HomePage() {
+  const res = await fetch("http://localhost:5000/api/surahs", {
+    next: { revalidate: 3600 } 
+  });
+  
+  const result = await res.json();
+  const surahs = result.data;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex flex-col min-h-screen bg-[#F8FAF9]"> 
+      {/* --- MODERN HERO SECTION --- */}
+      <section className="relative overflow-hidden bg-[#0F3D2E] pt-20 pb-32 px-6 text-center shadow-inner">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <div className="absolute top-10 left-10 w-40 h-40 border-8 border-white rounded-full"></div>
+          <div className="absolute bottom-10 right-10 w-60 h-60 border-4 border-white rotate-45 opacity-20"></div>
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <span className="inline-block px-4 py-1 bg-green-500/20 text-green-400 text-[10px] font-bold tracking-widest uppercase rounded-full mb-4 border border-green-500/30">
+            Read • Listen • Learn
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+            Explore the Wisdom of <br/> <span className="text-green-400">The Holy Quran</span>
+          </h2>
+          <p className="text-green-100/80 text-lg font-light">
+            An intuitive digital experience for the word of Allah.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* --- MAIN CONTENT --- */}
+      <main className="container mx-auto px-6 pb-16">
+       
+        <div className="flex justify-between items-end mb-10 border-b border-gray-100 pb-6 pt-10">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-800">All Surahs</h3>
+            <p className="text-sm text-gray-500 italic font-medium">114 Surahs available</p>
+          </div>
         </div>
+
+        
+        <SurahList initialSurahs={surahs} />
       </main>
     </div>
   );
