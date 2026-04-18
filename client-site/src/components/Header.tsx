@@ -74,27 +74,68 @@ export default function Header() {
 
       {/* --- MOBILE NAV DRAWER (Left Side) --- */}
       <aside
-        className={`fixed top-0 left-0 z-70 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-        <div className="p-6 flex justify-between items-center border-b">
-          <span className="font-bold text-gray-800">Menu</span>
-          <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="text-gray-400 hover:text-gray-600 text-xl">
-            ✕
-          </button>
-        </div>
-        <div className="p-6 flex flex-col gap-6">
-          {["Home", "Juz", "Surah", "About"].map(item => (
-            <Link
-              key={item}
-              href="/"
-              className="text-lg font-semibold text-gray-700 hover:text-green-600 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}>
-              {item}
-            </Link>
-          ))}
-        </div>
-      </aside>
+  className={`fixed top-0 left-0 z-[70] h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
+    isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+  }`}
+>
+  {/* Drawer Header: Logo, Name & Close Button */}
+  <div className="p-6 border-b flex items-center justify-between bg-white">
+    <div className="flex items-center gap-3">
+      {/* Small Logo Box */}
+      <div className="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center text-white font-bold shadow-md shadow-green-100 flex-shrink-0">
+        Q
+      </div>
+      {/* Brand Name */}
+      <div className="flex flex-col justify-center">
+        <h2 className="text-lg font-bold text-gray-900 leading-none">
+          Quran<span className="text-green-600">Flow</span>
+        </h2>
+        <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider mt-1">
+          Noble Quran
+        </span>
+      </div>
+    </div>
+
+    {/* Close Button */}
+    <button
+      onClick={() => setIsMobileMenuOpen(false)}
+      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-400"
+    >
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  {/* Navigation Content */}
+  <div className="py-4 px-3 flex flex-col gap-1">
+    {[
+      { name: "Home", path: "/" },
+      { name: "Juz", path: "/" },
+      { name: "Surah", path: "/" },
+      { name: "About", path: "/" }
+    ].map((item) => (
+      <Link
+        key={item.name}
+        href={item.path}
+        className="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-700 font-semibold hover:bg-green-50 hover:text-green-700 transition-all active:scale-95"
+        onClick={() => setIsMobileMenuOpen(false)}
+      >
+        <div className="w-1.5 h-1.5 rounded-full bg-green-200 group-hover:bg-green-600"></div>
+        {item.name}
+      </Link>
+    ))}
+  </div>
+
+  {/* Bottom Info Section */}
+  <div className="absolute bottom-6 left-0 w-full px-6">
+    <div className="pt-6 border-t border-gray-50">
+      <p className="text-[11px] text-gray-400 font-medium italic">
+        Read in the name of your Lord...
+      </p>
+    </div>
+  </div>
+</aside>
 
       {/* --- SETTINGS DRAWER (Right Side) --- */}
       <aside
